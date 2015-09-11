@@ -158,6 +158,16 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
+gulp.task('deploy', ['build'], () => {
+    return gulp.src('dist/**')
+      .pipe($.s3({
+          key: process.env.AWS_ACCESS_KEY,
+          secret: process.env.AWS_SECRET,
+          bucket: 'play.meneguello.com',
+          region: 'us-east-1'
+      }));
+});
+
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
 });
