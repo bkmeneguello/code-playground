@@ -1,0 +1,68 @@
+@import "bower_components/bootstrap/less/bootstrap.less";
+
+.row-xs-12 { height: 100%; }
+.row-xs-11 { height: 91.66666666666666%; }
+.row-xs-10 { height: 83.33333333333334%; }
+.row-xs-9 { height: 75%; }
+.row-xs-8 { height: 66.66666666666666%; }
+.row-xs-7 { height: 58.333333333333336%; }
+.row-xs-6 { height: 50%; }
+.row-xs-5 { height: 41.66666666666667%;}
+.row-xs-4 { height: 33.33333333333333%;}
+.row-xs-3 { height: 25%; }
+.row-xs-2 { height: 16.666666666666664%; }
+.row-xs-1 { height: 8.333333333333332%; }
+
+.fit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.detach {
+    position: absolute;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
+.z1 {
+    z-index: 1;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+body {
+  padding-top: 50px;
+}
+
+textarea, iframe {
+    border: 1px solid gray;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.editor {
+    position: relative;
+    label {
+        opacity: .5;
+        padding: 5px 8px;
+        pointer-events: none;
+        :hover {
+            opacity: .1;
+        }
+    }
+    textarea {
+        padding-top: 1em;
+    }
+}
