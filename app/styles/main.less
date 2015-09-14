@@ -13,6 +13,11 @@
 .row-xs-2 { height: 16.666666666666664%; }
 .row-xs-1 { height: 8.333333333333332%; }
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 .fit {
     position: absolute;
     top: 0;
@@ -43,25 +48,22 @@ body {
   padding-top: 50px;
 }
 
-textarea, iframe {
+.editor, iframe {
     border: 1px solid gray;
     outline: none;
 }
 
-textarea {
-    resize: none;
+label {
+    opacity: .5;
+    padding: 5px 8px;
+    pointer-events: none;
+    :hover {
+        opacity: .1;
+    }
 }
 
 .editor {
     position: relative;
-    label {
-        opacity: .5;
-        padding: 5px 8px;
-        pointer-events: none;
-        :hover {
-            opacity: .1;
-        }
-    }
     textarea {
         padding-top: 1em;
     }

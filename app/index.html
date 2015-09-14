@@ -49,17 +49,17 @@
     </nav>
     <div class="container-fluid row-xs-12">
         <div class="row row-xs-3">
-            <div class="editor col-xs-12 col-sm-4 row-xs-12">
+            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
                 <label class="detach z1 top-right">HTML</label>
-                <textarea id="html" class="detach fit fill"></textarea>
+                <div id="html" class="editor detach fit fill"></div>
             </div>
-            <div class="editor col-xs-12 col-sm-4 row-xs-12">
+            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
                 <label class="detach z1 top-right">JS</label>
-                <textarea id="js" class="detach fit fill"></textarea>
+                <div id="js" class="editor detach fit fill"></div>
             </div>
-            <div class="editor col-xs-12 col-sm-4 row-xs-12">
+            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
                 <label class="detach z1 top-right">CSS</label>
-                <textarea id="css" class="detach fit fill"></textarea>
+                <div id="css" class="editor detach fit fill"></div>
             </div>
         </div>
         <div class="row row-xs-9">
@@ -70,8 +70,9 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/oauth-js/dist/oauth.js"></script>
+    <script src="/bower_components/oauth-js/dist/oauth.min.js"></script>
+    <script src="/bower_components/ace-builds/src-noconflict/ace.js"></script>
+    <script src="/bower_components/ace-builds/src-noconflict/ext-language_tools.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

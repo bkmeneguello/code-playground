@@ -29,7 +29,8 @@
   },
   "eslintConfig": {
     "globals": {
-      "OAuth": false
+      "OAuth": false,
+      "ace": false
     },
     "env": {
       "node": true,
