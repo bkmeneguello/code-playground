@@ -11,6 +11,7 @@
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -39,10 +40,9 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#login" id="login">Login</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#update" id="update">Update</a></li>
+                    <li><a id="login" href="javascript:void(0)">Login</a></li>
+                    <li><a id="save" href="javascript:void(0)">Save</a></li>
+                    <li><a id="update" href="javascript:void(0)">Update</a></li>
                 </ul>
             </div>
         </div>
@@ -50,27 +50,29 @@
     <div class="container-fluid row-xs-12">
         <div class="row row-xs-3">
             <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z1 top-right">HTML</label>
-                <div id="html" class="editor detach fit fill"></div>
+                <label class="detach z2 top-right">HTML</label>
+                <div id="markup" class="editor framed detach fit fill"></div>
             </div>
             <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z1 top-right">JS</label>
-                <div id="js" class="editor detach fit fill"></div>
+                <label class="detach z2 top-right">JS</label>
+                <div id="script" class="editor framed detach fit fill"></div>
             </div>
             <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z1 top-right">CSS</label>
-                <div id="css" class="editor detach fit fill"></div>
+                <label class="detach z2 top-right">CSS</label>
+                <div id="style" class="editor framed detach fit fill"></div>
             </div>
         </div>
         <div class="row row-xs-9">
-            <iframe id="output" name="output" class="col-xs-12 row-xs-12"></iframe>
+            <iframe id="output" name="output" class="col-xs-12 row-xs-12 framed"></iframe>
         </div>
     </div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/oauth-js/dist/oauth.min.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/ace/ace.js -->

@@ -31,7 +31,8 @@
   "eslintConfig": {
     "globals": {
       "OAuth": false,
-      "ace": false
+      "ace": false,
+      "toastr": false
     },
     "env": {
       "node": true,
