@@ -21,6 +21,10 @@
     left: 0;
 }
 
+.context {
+    position: relative;
+}
+
 .detach {
     position: absolute;
 }
@@ -43,6 +47,10 @@
     right: 0;
 }
 
+.borderless {
+    border: none;
+}
+
 body {
   padding-top: 50px;
 }
@@ -56,10 +64,6 @@ label {
     opacity: .5;
     padding: 5px 8px;
     .user-select(none);
-    .transition(opacity 200ms linear);
-    &:hover {
-        opacity: .1;
-    }
 }
 
 .editor {
@@ -78,5 +82,48 @@ label {
 .only-auth {
     body:not(.auth) & {
         display: none;
+    }
+}
+
+#output-menu {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    > span {
+        line-height: 20px;
+    }
+    nav {
+        margin-right: 5px;
+    }
+    ul {
+        list-style: none;
+        direction: rtl;
+        li {
+            display: inline;
+        }
+    }
+}
+
+#output-wrapper {
+    transition: all 500ms linear;
+    transition-property: height, width, left, top, transform, border;
+    transform-origin: top center;
+    &.mobile-size {
+        height: 960px;
+        width: 640px;
+        left: ~"calc(50% - 320px)";
+        top: 20px;
+        border: 10px solid lightgray;
+        margin-bottom: 20px;
+        transform: scale(.5);
+    }
+    &.sd-size {
+        height: 768px;
+        width: 1366px;
+        left: ~"calc(50% - 683px)";
+        top: 20px;
+        border: 10px solid lightgray;
+        margin-bottom: 20px;
+        transform: scale(.5);
     }
 }

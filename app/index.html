@@ -64,7 +64,22 @@
             </div>
         </div>
         <div class="row row-xs-9">
-            <iframe id="output" name="output" class="col-xs-12 row-xs-12 framed nopadding"></iframe>
+            <div class="col-xs-12 row-xs-12 context nopadding">
+                <label id="output-menu" class="detach z2 top-right" data-toggle="collapse" data-target="#output-menu-nav">
+                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    <nav id="output-menu-nav" class="collapse">
+                         <ul class="nopadding">
+                             <li><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></li>
+                             <li><span id="output-hd-size" class="glyphicon glyphicon-hd-video" aria-hidden="true"></span></li>
+                             <li><span id="output-sd-size" class="glyphicon glyphicon-sd-video" aria-hidden="true"></span></li>
+                             <li><span id="output-phone-size" class="glyphicon glyphicon-phone" aria-hidden="true"></span></li>
+                         </ul>
+                    </nav>
+                </label>
+                <div id="output-wrapper" class="fit fill">
+                    <iframe id="output" name="output" class="fill borderless"></iframe>
+                </div>
+            </div>
         </div>
     </div>
 

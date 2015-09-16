@@ -102,4 +102,17 @@ $(function() {
         $(output.body).empty()
             .html(markup);
     });
+
+    $('#output-phone-size').click(function() {
+        $('#output-wrapper').removeClass('sd-size').addClass('mobile-size');
+    });
+
+    $('#output-sd-size').click(function() {
+        $('#output-wrapper').removeClass('mobile-size').addClass('sd-size');
+    });
+
+    $('#output-hd-size').click(function() {
+        $('#output-wrapper').removeClass('mobile-size sd-size');
+    });
+
 });
