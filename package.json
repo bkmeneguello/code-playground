@@ -32,7 +32,7 @@
     "globals": {
       "OAuth": false,
       "ace": false,
-      "toastr": false
+      "alertify": false
     },
     "env": {
       "node": true,

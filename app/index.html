@@ -11,12 +11,13 @@
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/bower_components/alertify.js/themes/alertify.core.css">
+    <link rel="stylesheet" href="/bower_components/alertify.js/themes/alertify.bootstrap.css">
     <!-- endbuild -->
 
     <!-- build:js scripts/vendor/modernizr.js -->
@@ -40,8 +41,8 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a id="login" href="javascript:void(0)">Login</a></li>
-                    <li><a id="save" href="javascript:void(0)">Save</a></li>
+                    <li class="no-auth"><a id="login" href="javascript:void(0)">Login</a></li>
+                    <li class="only-auth"><a id="save" href="javascript:void(0)">Save</a></li>
                     <li><a id="update" href="javascript:void(0)">Update</a></li>
                 </ul>
             </div>
@@ -63,16 +64,16 @@
             </div>
         </div>
         <div class="row row-xs-9">
-            <iframe id="output" name="output" class="col-xs-12 row-xs-12 framed"></iframe>
+            <iframe id="output" name="output" class="col-xs-12 row-xs-12 framed nopadding"></iframe>
         </div>
     </div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/alertify.js/lib/alertify.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/oauth-js/dist/oauth.min.js"></script>
-    <script src="/bower_components/toastr/toastr.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/ace/ace.js -->

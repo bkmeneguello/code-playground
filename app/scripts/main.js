@@ -24,26 +24,20 @@ $(function() {
     var scriptEditor = editor('script', 'javascript', localStorage.getItem('script'));
     var styleEditor = editor('style', 'css', localStorage.getItem('style'));
 
-    $('#save').hide();
-
     OAuth.initialize('mj0kqdjERrNWCYZ8XCr8lNa3LYE');
     var github = OAuth.create('github');
-    if (github) {
-        $('#save').show();
-        $('#login').hide();
-    }
+    $('body').toggleClass('auth', !!github);
 
     $('#login').click(function() {
-        OAuth.popup('github')
+        OAuth.popup('github', {cache: true})
             .done(function(result) {
-                $('#save').show();
-                $('#login').hide();
+                $('body').toggleClass('auth', true);
                 console.log(result);
                 github = result;
-                console.log(github.get('/gists'));
             })
             .fail(function (err) {
-              console.log(err);
+                $('body').toggleClass('auth', false);
+                console.log(err);
             });
     });
 
@@ -52,31 +46,42 @@ $(function() {
         var script = scriptEditor.getValue();
         var style = styleEditor.getValue();
 
-        github.post('/gists', {
-            dataType: 'json',
-            data: JSON.stringify({
-                public: true,
-                files: {
-                    markup: {
-                        content: markup
-                    },
-                    script: {
-                        content: script
-                    },
-                    style: {
-                        content: style
-                    }
+        var gist = {
+            public: true,
+            files: {
+                '_play.conf': {
+                    content: '{}'
+                },
+                markup: {
+                    content: markup
+                },
+                script: {
+                    content: script
+                },
+                style: {
+                    content: style
                 }
+            }
+        };
+
+        alertify.prompt('Descrição (opcional)', function (e, response) {
+            if (response) {
+                gist.description = response;
+            }
+            github.post('/gists', {
+                dataType: 'json',
+                data: JSON.stringify(gist)
             })
-        })
-        .done(function(result) {
-            console.log(result);
-            toastr.success('Success');
-            window.location.hash = result.id;
-        })
-        .fail(function(err) {
-            console.log(err);
-            toastr.error('Fail');
+            .done(function(result) {
+                console.log(result);
+                var url = 'gist.github.com/' + result.id;
+                alertify.success('<a href="https://' + url + '">' + url + '</a>');
+                window.location.hash = result.id;
+            })
+            .fail(function(err) {
+                console.log(err);
+                alertify.error('Falhou!');
+            });
         });
     });
 

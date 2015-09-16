@@ -68,3 +68,15 @@ label {
         padding-top: 1em;
     }
 }
+
+.no-auth {
+    body.auth & {
+        display: none;
+    }
+}
+
+.only-auth {
+    body:not(.auth) & {
+        display: none;
+    }
+}
