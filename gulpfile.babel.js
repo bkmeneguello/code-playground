@@ -45,7 +45,7 @@ gulp.task('html', ['styles'], () => {
   return gulp.src('app/*.html')
     .pipe(assets)
     .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
+    .pipe($.if('*.css', $.minifyCss({compatibility: '*', 'keepSpecialComments': 0})))
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
@@ -71,9 +71,12 @@ gulp.task('images', () => {
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')({
     filter: '**/*.{eot,svg,ttf,woff,woff2}'
-}).concat(['app/fonts/**/*', 'bower_components/bootstrap/fonts/*']))
-    .pipe(gulp.dest('.tmp/fonts'))
-    .pipe(gulp.dest('dist/fonts'));
+  }).concat([
+    'app/fonts/**/*',
+    'bower_components/bootstrap/fonts/*'
+  ]))
+  .pipe(gulp.dest('.tmp/fonts'))
+  .pipe(gulp.dest('dist/fonts'));
 });
 
 gulp.task('extras', () => {
@@ -86,9 +89,8 @@ gulp.task('extras', () => {
 });
 
 gulp.task('ace', function() {
-  return gulp.src([
-      'bower_components/ace-builds/src-noconflict/**',
-    ]).pipe(gulp.dest('dist/scripts/ace'));
+  return gulp.src(['bower_components/ace-builds/src-min-noconflict/**',])
+    .pipe(gulp.dest('dist/scripts/ace'));
 });
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));

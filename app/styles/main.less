@@ -1,5 +1,7 @@
 @import "bower_components/bootstrap/less/bootstrap.less";
 
+@grid-gutter-width: 0;
+
 .generate-rows(@n, @i: 1) when (@i =< @n) {
     .row-xs-@{i} {
         height: (@i * 100% / @n);
@@ -30,8 +32,24 @@
 }
 
 .fill {
+    .fill-width();
+    .fill-height();
+}
+
+.fill-width {
     width: 100%;
+}
+
+.fill-height {
     height: 100%;
+}
+
+.heightless {
+    height: 0;
+}
+
+.widthless {
+    width: 0;
 }
 
 .generate-z(@n, @i: 1) when (@i =< @n) {
@@ -51,13 +69,33 @@
     border: none;
 }
 
-body {
-  padding-top: 50px;
-}
-
 .framed {
     border: 1px solid gray;
     outline: none;
+}
+
+.layout {
+    display: flex;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.grow1 {
+    flex-grow: 1;
+}
+
+.contained {
+        overflow: hidden;
+}
+
+iframe {
+    display: block;
 }
 
 label {

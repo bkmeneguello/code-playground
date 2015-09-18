@@ -24,12 +24,12 @@
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  <body class="fit">
+  <body class="fit layout vertical">
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,40 +44,43 @@
                     <li class="no-auth"><a id="login" href="javascript:void(0)">Login</a></li>
                     <li class="only-auth"><a id="save" href="javascript:void(0)">Save</a></li>
                     <li><a id="update" href="javascript:void(0)">Update</a></li>
+                    <li><a id="layout" href="javascript:void(0)" class="hidden-xs hidden-sm">Layout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container-fluid row-xs-12">
-        <div class="row row-xs-3">
-            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z2 top-right">HTML</label>
-                <div id="markup" class="editor framed detach fit fill"></div>
+    <div class="context grow1">
+        <div class="fit">
+            <div id="editors" class="fill-width row-xs-3">
+                <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
+                    <label class="detach z2 top-right">HTML</label>
+                    <div id="markup" class="editor framed detach fit fill"></div>
+                </div>
+                <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
+                    <label class="detach z2 top-right">JS</label>
+                    <div id="script" class="editor framed detach fit fill"></div>
+                </div>
+                <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
+                    <label class="detach z2 top-right">CSS</label>
+                    <div id="style" class="editor framed detach fit fill"></div>
+                </div>
             </div>
-            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z2 top-right">JS</label>
-                <div id="script" class="editor framed detach fit fill"></div>
-            </div>
-            <div class="nopadding col-xs-12 col-sm-4 row-xs-12">
-                <label class="detach z2 top-right">CSS</label>
-                <div id="style" class="editor framed detach fit fill"></div>
-            </div>
-        </div>
-        <div class="row row-xs-9">
-            <div class="col-xs-12 row-xs-12 context nopadding">
-                <label id="output-menu" class="detach z2 top-right" data-toggle="collapse" data-target="#output-menu-nav">
-                    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-                    <nav id="output-menu-nav" class="collapse">
-                         <ul class="nopadding">
-                             <li><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></li>
-                             <li><span id="output-hd-size" class="glyphicon glyphicon-hd-video" aria-hidden="true"></span></li>
-                             <li><span id="output-sd-size" class="glyphicon glyphicon-sd-video" aria-hidden="true"></span></li>
-                             <li><span id="output-phone-size" class="glyphicon glyphicon-phone" aria-hidden="true"></span></li>
-                         </ul>
-                    </nav>
-                </label>
-                <div id="output-wrapper" class="fit fill">
-                    <iframe id="output" name="output" class="fill borderless"></iframe>
+            <div id="output-pane" class="fill-width row-xs-9">
+                <div class="col-xs-12 row-xs-12 context nopadding">
+                    <label id="output-menu" class="detach z2 top-right" data-toggle="collapse" data-target="#output-menu-nav">
+                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                        <nav id="output-menu-nav" class="collapse">
+                             <ul class="nopadding">
+                                 <li><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></li>
+                                 <li><span id="output-hd-size" class="glyphicon glyphicon-hd-video hidden-xs" aria-hidden="true"></span></li>
+                                 <li><span id="output-sd-size" class="glyphicon glyphicon-sd-video hidden-xs hidden-sm" aria-hidden="true"></span></li>
+                                 <li><span id="output-phone-size" class="glyphicon glyphicon-phone hidden-xs" aria-hidden="true"></span></li>
+                             </ul>
+                        </nav>
+                    </label>
+                    <div id="output-wrapper" class="fit fill">
+                        <iframe id="output" name="output" class="fill borderless"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,8 +96,6 @@
     <!-- endbuild -->
     <!-- build:js scripts/ace/ace.js -->
     <script src="/bower_components/ace-builds/src-noconflict/ace.js"></script>
-    <!-- endbuild -->
-    <!-- build:js scripts/ace/ext-language_tools.js -->
     <script src="/bower_components/ace-builds/src-noconflict/ext-language_tools.js"></script>
     <!-- endbuild -->
 

@@ -103,6 +103,19 @@ $(function() {
             .html(markup);
     });
 
+    $('#layout').click(function() {
+        if ($('#editors').hasClass('fill-width')) {
+            $('#editors').removeClass('row-xs-3 fill-width').addClass('fill-height col-xs-9');
+            $('#output-pane').removeClass('row-xs-9 fill-width').addClass('fill-height col-xs-3');
+        } else {
+            $('#editors').removeClass('fill-height col-xs-9').addClass('row-xs-3 fill-width');
+            $('#output-pane').removeClass('fill-height col-xs-3').addClass('row-xs-9 fill-width');
+        }
+        markupEditor.resize();
+        scriptEditor.resize();
+        styleEditor.resize();
+    });
+
     $('#output-phone-size').click(function() {
         $('#output-wrapper').removeClass('sd-size').addClass('mobile-size');
     });
