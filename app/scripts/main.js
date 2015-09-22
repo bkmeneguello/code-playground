@@ -3,7 +3,7 @@
 $(function() {
     ace.require('ace/ext/language_tools');
 
-    function editor(id, mode, value) {
+    function editor(id, mode) {
         var e = ace.edit(id);
         e.setTheme('ace/theme/chrome');
         e.getSession().setMode('ace/mode/' + mode);
@@ -16,17 +16,28 @@ $(function() {
             enableLiveAutocompletion: false
         });
         e.$blockScrolling = Infinity;
-        e.setValue(value || '', -1);
         return e;
     }
-
-    var markupEditor = editor('markup', 'html', localStorage.getItem('markup'));
-    var scriptEditor = editor('script', 'javascript', localStorage.getItem('script'));
-    var styleEditor = editor('style', 'css', localStorage.getItem('style'));
 
     OAuth.initialize('mj0kqdjERrNWCYZ8XCr8lNa3LYE');
     var github = OAuth.create('github');
     $('body').toggleClass('auth', !!github);
+
+    var markupEditor = editor('markup', 'html');
+    var scriptEditor = editor('script', 'javascript');
+    var styleEditor = editor('style', 'css');
+
+    if (window.location.hash) {
+        $.getJSON('https://api.github.com/gists/' + window.location.hash.substr(1), function(gist) {
+            markupEditor.setValue(gist.files['markup.html'].content || '', -1);
+            scriptEditor.setValue(gist.files['script.js'].content || '', -1);
+            styleEditor.setValue(gist.files['style.css'].content || '', -1);
+        });
+    } else {
+        markupEditor.setValue(localStorage.getItem('markup') || '', -1);
+        scriptEditor.setValue(localStorage.getItem('script') || '', -1);
+        styleEditor.setValue(localStorage.getItem('style') || '', -1);
+    }
 
     $('#login').click(function() {
         OAuth.popup('github', {cache: true})
@@ -41,6 +52,8 @@ $(function() {
             });
     });
 
+    var settings = {};
+
     $('#save').click(function() {
         var markup = markupEditor.getValue();
         var script = scriptEditor.getValue();
@@ -49,26 +62,23 @@ $(function() {
         var gist = {
             public: true,
             files: {
-                '_play.conf': {
-                    content: '{}'
-                },
-                markup: {
-                    content: markup
-                },
-                script: {
-                    content: script
-                },
-                style: {
-                    content: style
+                '_play.json': {
+                    content: JSON.stringify(settings)
                 }
             }
         };
+
+        gist.files['markup.html'] = markup ? {content: markup} : null;
+        gist.files['script.js'] = script ? {content: script} : null;
+        gist.files['style.css'] = style ? {content: style} : null;
 
         alertify.prompt('Descrição (opcional)', function (e, response) {
             if (response) {
                 gist.description = response;
             }
-            github.post('/gists', {
+
+            var gistUrl = '/gists' + (window.location.hash ? '/' + window.location.hash.substr(1) : '');
+            github.post(gistUrl, {
                 dataType: 'json',
                 data: JSON.stringify(gist)
             })
