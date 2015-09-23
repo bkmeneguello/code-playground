@@ -32,7 +32,9 @@
     "globals": {
       "OAuth": false,
       "ace": false,
-      "alertify": false
+      "alertify": false,
+      "define": false,
+      "github": false
     },
     "env": {
       "node": true,

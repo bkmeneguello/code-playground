@@ -19,19 +19,21 @@ $(function() {
         return e;
     }
 
-    OAuth.initialize('mj0kqdjERrNWCYZ8XCr8lNa3LYE');
-    var github = OAuth.create('github');
-    $('body').toggleClass('auth', !!github);
+    github.init()
+    .then(function() {
+        $('body').addClass('auth');
+    })
+    .catch($.noop);
 
     var markupEditor = editor('markup', 'html');
     var scriptEditor = editor('script', 'javascript');
     var styleEditor = editor('style', 'css');
 
     if (window.location.hash) {
-        $.getJSON('https://api.github.com/gists/' + window.location.hash.substr(1), function(gist) {
-            markupEditor.setValue(gist.files['markup.html'].content || '', -1);
-            scriptEditor.setValue(gist.files['script.js'].content || '', -1);
-            styleEditor.setValue(gist.files['style.css'].content || '', -1);
+        github.loadGist(window.location.hash.substr(1)).then(function(gist) {
+            markupEditor.setValue(gist.files['markup.html'] ? (gist.files['markup.html'].content || '') : '', -1);
+            scriptEditor.setValue(gist.files['script.js'] ? (gist.files['script.js'].content || '') : '', -1);
+            styleEditor.setValue(gist.files['style.css'] ? (gist.files['style.css'].content || '') : '', -1);
         });
     } else {
         markupEditor.setValue(localStorage.getItem('markup') || '', -1);
@@ -40,16 +42,14 @@ $(function() {
     }
 
     $('#login').click(function() {
-        OAuth.popup('github', {cache: true})
-            .done(function(result) {
-                $('body').toggleClass('auth', true);
-                console.log(result);
-                github = result;
-            })
-            .fail(function (err) {
-                $('body').toggleClass('auth', false);
-                console.log(err);
-            });
+        github.login()
+        .then(function() {
+            $('body').addClass('auth');
+        })
+        .catch(function(err) {
+            $('body').removeClass('auth');
+            console.log(err);
+        });
     });
 
     var settings = {};
@@ -77,18 +77,15 @@ $(function() {
                 gist.description = response;
             }
 
-            var gistUrl = '/gists' + (window.location.hash ? '/' + window.location.hash.substr(1) : '');
-            github.post(gistUrl, {
-                dataType: 'json',
-                data: JSON.stringify(gist)
-            })
-            .done(function(result) {
-                console.log(result);
-                var url = 'gist.github.com/' + result.id;
+            var hash = window.location.hash ? window.location.hash.substr(1) : undefined;
+            github.saveGist(gist, hash)
+            .then(function(gist) {
+                console.log(gist);
+                var url = 'gist.github.com/' + gist.id;
                 alertify.success('<a href="https://' + url + '">' + url + '</a>');
-                window.location.hash = result.id;
+                window.location.hash = gist.id;
             })
-            .fail(function(err) {
+            .catch(function(err) {
                 console.log(err);
                 alertify.error('Falhou!');
             });
